@@ -3,13 +3,13 @@ function login(){
 
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const loginCreds =JSON.stringify({
+        const loginCreds = JSON.stringify({
             email:e.target.querySelector('[name=email]').value,
             password:e.target.querySelector('[name=password]').value
         });
         fetch("http://localhost:5678/api/users/login", {
             method: "post",
-            header:{ "Content-Type": "application/json" },
+            headers:{ "Content-Type": "application/json" },
             body: loginCreds,
         })
         .then((res)=>{
@@ -22,7 +22,7 @@ function login(){
         .then((data) => {
             if (data.token){
                 localStorage.setItem('token', data.token);
-                window.location.href='index.html'
+                window.location.href='edtion.html'
             };
         });
     });

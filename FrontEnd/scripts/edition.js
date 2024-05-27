@@ -8,6 +8,7 @@ fetch("http://localhost:5678/api/works")
     // Appel de la fonction pour afficher toutes les images
     displayAllImages();
     loadModalImages();
+    AddPhoto();
   })
   .catch((err) => console.log(err));
 
@@ -82,22 +83,46 @@ function loadModalImages() {
         imageContainer.appendChild(image);
         imageContainer.appendChild(deleteIcon); 
         gridPhoto.appendChild(imageContainer);
+
+        // Ajoute un gestionnaire d'événements pour l'icône de suppression
+        deleteIcon.addEventListener('click', () => {
+            deleteImage(project.id, imageContainer);
+        });
     });
 }
 
+// **********************************************fetch delet************************************************
+
+// Fonction pour envoyer une requête DELETE et supprimer l'image de la div
+function deleteImage(imageId, imageContainer) {
+    fetch(`http://localhost:5678/api/works${imageUrl}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            // Supprime l'image de la div
+            imageContainer.remove();
+        } else {
+            console.error('Failed to delete image');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
 const btnAddPhoto = document.getElementById('addphoto');
-
-// btnAddPhoto.addEventListener('click', function() {
-//     alert('clic');
-
-// });
 
 // fenetre modal ajout photo
 
 const modalContainerAdd = document.querySelector('.modal-container-add-photo');
 const closeModalAddButton = document.getElementById('close-modal-add');
 const modalContainer = document.querySelector('.modal-container');
-const returnModal = document.getElementById('return-modal')
+const returnModal = document.getElementById('return-modal');
 
         btnAddPhoto.addEventListener('click', function(e) {
             e.preventDefault();
@@ -118,34 +143,96 @@ const returnModal = document.getElementById('return-modal')
             modalContainer.classList.add('active');
         });
 
-// poster la nouvelle photo
+// declenchement input
 
-// function AddPhoto(){
+const browseButton = document.getElementById('browse-button');
+const photoInput = document.getElementById('photo-input');
 
-//     const ajoutButton = document.getElementById('new-photo');
-//     const titreNewPhoto = document.querySelector('input[type="text"]');
-//     const categoryNewPhoto = document.querySelector("select");
+browseButton.addEventListener('click', () => {
+    photoInput.click(); // Déclenchez le clic sur l'élément input de type "file"
+});
 
-//     titreNewPhoto.addEventListener('input', (e) => {
-//         console.log(e.target.value);
+// *********************** fetch post new photo ; test 1
 
-//         });
+function AddPhoto() {
+    const ajoutButton = document.getElementById('valide-photo');
+    const titreNewPhoto = document.getElementById('title');
+    const categoryNewPhoto = document.getElementById('category'); 
+    const visuPhoto = document.querySelector('.visu-photo');
+    const photoInput = document.getElementById('photo-input');
+    const form = document.forms.namedItem("fileinfo");
 
-//     categoryNewPhoto.addEventListener('input', (e) => {
-//         console.log(e.target.value);
-    
-//         });
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const output = document.querySelector("#output");
+
+        const fd = new FormData();
+        const token = localStorage.getItem("token")
+        console.log(token);
+       
+        fd.append('title', titreNewPhoto.value);
+        fd.append('category', categoryNewPhoto.value);
+        if (photoInput.files.length > 0) {
+        fd.append('image', photoInput.files[0]);
+        } else {
+        output.innerHTML = "Veuillez sélectionner une image.";
+        return;
+        } 
+        console.log(fd.get("category"));
+        console.log(fd.get("title"));
+        console.log(fd.get("image"));
+
+        fetch("http://localhost:5678/api/works", {
+            method: "POST", 
+            headers: {
+                Autorization: `Bearer ${token}`,
+            },
+            body: fd,
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    });
 
 
-//         fetch("http://localhost:5678/api/works", {
-//             method: "post",
-//             header:{ "Content-Type": "application/json" },
-//             body: JSON.stringify({
-//                 title: "",
-//                 category: "",
-//                 imageUrl:"",
-//             }),
-//         })
-//         .then((res)=> response.json())
-//         .then((json) => console.log(json));
-// }
+
+    // ajoutButton.addEventListener('click', () => {
+    //     const title = titreNewPhoto.value;
+    //     const category = categoryNewPhoto.value;
+    //     const photoFile = photoInput.files[0]; // Récupère le premier fichier sélectionné
+        
+        
+
+
+        // Ajoute un écouteur d'événements sur le changement de l'élément input de type "file"
+        photoInput.addEventListener('change', (e) => {
+            console.log(e);
+            console.log("L'image a été sélectionnée avec succès !");
+            visuPhoto.classList.add('active');
+        
+            const VisuNewImage = document.querySelector('.container-newphoto');
+            const selectedImage = document.createElement('img');
+            const file = photoInput.files[0];
+            console.log(file);
+        
+            if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                selectedImage.src = imageUrl;
+                console.log("L'URL de l'image est :", imageUrl);
+        
+            }
+        
+            VisuNewImage.appendChild(selectedImage);
+        });
+        
+        
+        
+
+}
+
+
+
+
+
+
+

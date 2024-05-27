@@ -23,7 +23,7 @@
 		<ul>
 			<li><a href="edtion.html#portfolio">projets</a></li>
 			<li><a href="edtion.html#contact">contact</a></li>
-			<li><a href="logIn.html">login</a></li>
+			<li><a href="logIn.html">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -47,28 +47,35 @@
             <button id="return-modal"><i class="fa-solid fa-arrow-left fa-2x"></i></button>
             <button id="close-modal-add" class="modal-triggers"><i class="fa-solid fa-xmark fa-2x"></i></button>
         </div>
-            <div class="container-add-newphoto">
-                <h2>Ajout photo</h2>
-                <div class="visu-photo">
-                    <i class="fa-regular fa-image"></i>
-                    <button id="new-photo">+ Ajouter photo</button>
-                    <p>jpg, png : 4mo max</p>
-                </div>
-                <div class="form">
-                    <label for="title">Titre</label>
-                    <input type="text" id="title" name="title">
-                
-                    <label for="category">Catégorie</label>
-                    <select id="category" name="category">
-                        <option value="categorie1">Objets</option>
-                        <option value="categorie2">Appartements</option>
-                        <option value="categorie3">hotels & restaurants</option>
-                    </select>
-                </div>
+		
+		<div class="container-add-newphoto">
+			<h2>Ajout photo</h2>
+			<form enctype="multipart/form-data" method="post" name="fileinfo">
+				<div class="container-newphoto">
+				<div class="visu-photo">
+					<i class="fa-regular fa-image"></i>
+					<!-- Utilisez un bouton personnalisé pour déclencher le clic sur l'élément input de type "file" -->
+					<button id="browse-button">+ Ajouter photo</button>
+					<!-- Cachez l'élément input de type "file" -->
+					<input type="file" id="photo-input" accept="image/*" style="display: none;">
+					<p>jpg, png : 4mo max</p>
+				</div>
+				</div>
+			
 
-            </div>
-            <button id="valide-photo">Valider</button>
-        
+				<label for="title">Titre</label>
+				<input type="text" id="title" name="title">
+				
+				<label for="category">Catégorie</label>
+				<select id="category" name="category">
+					<option value="categorieId: 1">Objets</option>
+					<option value="categorieId: 2">Appartements</option>
+					<option value="categorieId: 3">Hotels & restaurants</option>
+				</select>
+				<input id="valide-photo" type="submit" value="Valider" />
+			</form>
+			<div id="output"></div>
+		</div>
     </div>
 </div>
 

@@ -131,12 +131,14 @@ nav ul {
 
 }
 nav li {
-	padding: 0 10px;
+	padding: 0 20px;
 	font-size: 1.2em;
 }
 
 li:hover , li a:hover {
-	color: #B1663C;
+	font-weight: bold;
+	
+
 }
 nav li img {
 	width: 20px;
@@ -209,6 +211,12 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+#contact input[type="submit"]:hover {
+	background: #0E2F28;
+	cursor: pointer;
+
+}
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
@@ -239,7 +247,7 @@ footer nav ul {
 	align-items: center;
 	padding-left: 480px;
 	padding-right:350px;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 	
 #portfolio .fa-pen-to-square {
@@ -310,8 +318,6 @@ margin-left: 20px;
 .modal-container.active {
     display: block;
 }
-
-
 
 .overlay{
 	position: absolute;
@@ -446,6 +452,7 @@ cursor: pointer;
 	display: block;
 }
 
+
 #close-modal-add{
 	position: fixed;
 	right: 40px;
@@ -474,11 +481,34 @@ cursor: pointer;
 	border-bottom: 1px solid #B3B3B3;
 	
 }
-.visu-photo{
+
+.container-newphoto {
 	width: 100%;
 	height: 35%;
-	padding-top: 5px;
+	margin-top: 5px;
 	margin-bottom: 20px;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	background: #E8F1F6;
+}
+
+.container-newphoto img {
+    max-width: 420px;
+    max-height: 175px;
+
+}
+
+.visu-photo.active {
+	display: none;
+}
+
+.visu-photo{
+	width: 100%;
+	height: 100%;
 	border-radius: 3px;
 	display: flex;
 	flex-direction: column;
@@ -496,7 +526,7 @@ cursor: pointer;
 	color: #444444;
 	
 }
-#new-photo{
+#browse-button{
 	width: 173px;
 	height: 36px;
 	gap: 0px;
@@ -527,9 +557,9 @@ cursor: pointer;
 	
 }
 
-.form{
+form{
 	width: 100%;
-	height: 50%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -572,13 +602,11 @@ cursor: pointer;
 #category {
 	width: 420px;
 	height: 51px;
-	top: 1109px;
-	left: 510px;
-	gap: 0px;
-	opacity: 0px;
+	padding: 0 10px;
 	border: 0;
 	cursor: pointer;
 	background: #FFFFFF;
+	color: gray;
 	box-shadow: 0px 4px 14px 0px #00000017;
 	
 }
@@ -637,3 +665,4 @@ label[for="category"] {
 	text-align: center;
 	margin-bottom: 35px;
 }
+
