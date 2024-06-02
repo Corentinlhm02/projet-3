@@ -77,11 +77,11 @@ function loadModalImages() {
         const imageContainer = document.createElement('div');
         const image = document.createElement('img');
         const deleteIcon = document.createElement('i');
-        deleteIcon.className = 'delete-icon fa-solid fa-trash-can'; 
+        deleteIcon.className = 'delete-icon fa-solid fa-trash-can';
 
         image.src = project.imageUrl;
         imageContainer.appendChild(image);
-        imageContainer.appendChild(deleteIcon); 
+        imageContainer.appendChild(deleteIcon);
         gridPhoto.appendChild(imageContainer);
 
         // Ajoute un gestionnaire d'événements pour l'icône de suppression
@@ -126,18 +126,18 @@ const returnModal = document.getElementById('return-modal');
 
         btnAddPhoto.addEventListener('click', function(e) {
             e.preventDefault();
-    
+
             // Ouvrir la fenêtre modale
             modalContainerAdd.classList.add('active');
             modalContainer.classList.remove('active');
         });
-    
+
         closeModalAddButton.addEventListener('click', function() {
             // Fermer la fenêtre modale
             modalContainerAdd.classList.remove('active');
             modalContainer.classList.remove('active');
         });
-    
+
         returnModal.addEventListener('click', function() {
             modalContainerAdd.classList.remove('active');
             modalContainer.classList.add('active');
@@ -157,7 +157,7 @@ browseButton.addEventListener('click', () => {
 function AddPhoto() {
     const ajoutButton = document.getElementById('valide-photo');
     const titreNewPhoto = document.getElementById('title');
-    const categoryNewPhoto = document.getElementById('category'); 
+    const categoryNewPhoto = document.getElementById('category');
     const visuPhoto = document.querySelector('.visu-photo');
     const photoInput = document.getElementById('photo-input');
     const form = document.forms.namedItem("fileinfo");
@@ -169,7 +169,7 @@ function AddPhoto() {
         const fd = new FormData();
         const token = localStorage.getItem("token")
         console.log(token);
-       
+
         fd.append('title', titreNewPhoto.value);
         fd.append('category', categoryNewPhoto.value);
         if (photoInput.files.length > 0) {
@@ -177,15 +177,15 @@ function AddPhoto() {
         } else {
         output.innerHTML = "Veuillez sélectionner une image.";
         return;
-        } 
+        }
         console.log(fd.get("category"));
         console.log(fd.get("title"));
         console.log(fd.get("image"));
 
         fetch("http://localhost:5678/api/works", {
-            method: "POST", 
+            method: "POST",
             headers: {
-                Autorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
             body: fd,
         })
@@ -200,8 +200,8 @@ function AddPhoto() {
     //     const title = titreNewPhoto.value;
     //     const category = categoryNewPhoto.value;
     //     const photoFile = photoInput.files[0]; // Récupère le premier fichier sélectionné
-        
-        
+
+
 
 
         // Ajoute un écouteur d'événements sur le changement de l'élément input de type "file"
@@ -209,24 +209,24 @@ function AddPhoto() {
             console.log(e);
             console.log("L'image a été sélectionnée avec succès !");
             visuPhoto.classList.add('active');
-        
+
             const VisuNewImage = document.querySelector('.container-newphoto');
             const selectedImage = document.createElement('img');
             const file = photoInput.files[0];
             console.log(file);
-        
+
             if (file) {
                 const imageUrl = URL.createObjectURL(file);
                 selectedImage.src = imageUrl;
                 console.log("L'URL de l'image est :", imageUrl);
-        
+
             }
-        
+
             VisuNewImage.appendChild(selectedImage);
         });
-        
-        
-        
+
+
+
 
 }
 
