@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,81 +91,106 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1440px;
 	margin: auto;
-	font-family: 'Work Sans' ;
+	font-family: 'Work Sans';
 	font-size: 14px;
 	background: #FFFEF8;
 
 }
+
 /* barre edition mode */
 
-.bar-edition{
+.bar-edition {
 	height: 59px;
 	gap: 0px;
 	opacity: 0px;
-	display: flex;	
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
 	top: 0;
 	background: #000;
 }
+
 .bar-edition .fa-pen-to-square {
 	width: 15.58px;
 	height: 15.58px;
 	top: 2px;
 	gap: 0px;
-	opacity: 0px;	
+	opacity: 0px;
 	color: #ffffff;
 
 
 }
+
 .bar-edition p {
 	font-family: 'Work Sans';
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 18.77px;
-	text-align: center;	
+	text-align: center;
 	color: #ffffff;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0;
 	padding: 0px 150px 0px 150px;
-	
+
 }
+
 section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -106,54 +199,62 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
 li a {
 	color: inherit;
 	text-decoration: none;
-  }
-  
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 20px;
 	font-size: 1.2em;
 }
 
-li:hover , li a:hover {
+li:hover,
+li a:hover {
 	font-weight: bold;
-	
+
 
 }
+
 nav li img {
 	width: 20px;
 	height: 20px;
 }
-main{
+
+main {
 	padding: 0px 150px 0px 150px;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -163,6 +264,7 @@ main{
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -170,11 +272,13 @@ main{
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
-	
-	
+
+
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -187,20 +291,24 @@ main{
 	width: 100%;
 
 }
+
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
-#contact > * {
+
+#contact>* {
 	text-align: center;
 
 }
-#contact h2{
+
+#contact h2 {
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -211,6 +319,7 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact input[type="submit"]:hover {
 	background: #0E2F28;
 	cursor: pointer;
@@ -220,20 +329,21 @@ margin: auto;
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
 }
 
 footer nav ul {
@@ -246,12 +356,12 @@ footer nav ul {
 	display: flex;
 	align-items: center;
 	padding-left: 480px;
-	padding-right:350px;
+	padding-right: 350px;
 	margin-bottom: 100px;
 }
-	
+
 #portfolio .fa-pen-to-square {
-margin-left: 20px;
+	margin-left: 20px;
 }
 
 #portfolio a {
@@ -262,51 +372,56 @@ margin-left: 20px;
 
 
 /* boutons filtre */
-.filterButtons{
+.filterButtons {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
 	margin-bottom: 50px;
 }
 
-#btnFilter{
+#btnFilter {
 
 	font-family: Syne;
 	font-size: 16px;
 	font-weight: 700;
 	border-radius: 60px;
 	border: 1px;
-	opacity: 0px;	
+	opacity: 0px;
 	text-align: center;
 	color: #1D6154;
-	border: 1px solid #1D6154 ;
+	border: 1px solid #1D6154;
 	background: #ffffff;
 }
-#btnFilter:hover{
+
+#btnFilter:hover {
 	background: #1D6154;
 	color: #ffffff;
 }
 
-.btn-tous{
+.btn-tous {
 	width: 100px;
 	height: 37px;
-	
+
 }
-.btn-objets{
+
+.btn-objets {
 	width: 100px;
 	height: 37px;
 }
-.btn-appartements{
+
+.btn-appartements {
 	width: 157px;
 	height: 37px;
 }
-.btn-hotels-restaurants{
+
+.btn-hotels-restaurants {
 	width: 198px;
 	height: 37px;
-	
+
 }
+
 /********************* fenetre modal *********************/
-.modal-container{
+.modal-container {
 	display: none;
 	position: fixed;
 	top: 0;
@@ -316,17 +431,18 @@ margin-left: 20px;
 }
 
 .modal-container.active {
-    display: block;
+	display: block;
 }
 
-.overlay{
+.overlay {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	background: #0000004D;
-	
+
 }
-.modal{
+
+.modal {
 	width: 570px;
 	height: 610px;
 	border-radius: 10px;
@@ -345,22 +461,24 @@ margin-left: 20px;
 	transform: translate(-50%, -50%);
 
 }
-#close-modal{
-position: fixed;
-right: 40px;
-top: 40px;
-width: 24px;
-height: 24px;
-padding: 6px 5.99px 5.99px 6px;
-gap: 0px;
-opacity: 0px;
-display: flex;
-justify-content: center;
-align-items: center;
-background: #ffffff;
-border: 0;
-cursor: pointer;
+
+#close-modal {
+	position: fixed;
+	right: 40px;
+	top: 40px;
+	width: 24px;
+	height: 24px;
+	padding: 6px 5.99px 5.99px 6px;
+	gap: 0px;
+	opacity: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #ffffff;
+	border: 0;
+	cursor: pointer;
 }
+
 .modal h2 {
 	width: 173px;
 	height: 30px;
@@ -375,8 +493,9 @@ cursor: pointer;
 	text-align: center;
 	color: #000000;
 
-		
+
 }
+
 .grid-photo {
 	position: relative;
 	width: 72%;
@@ -391,21 +510,22 @@ cursor: pointer;
 
 
 .grid-photo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover; 
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
 }
+
 .grid-photo div {
-    display: flex;
+	display: flex;
 	justify-content: end;
 }
 
 .delete-icon {
-    position: absolute;
+	position: absolute;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    cursor: pointer;
+	cursor: pointer;
 	font-size: 10px;
 	width: 17px;
 	height: 17px;
@@ -415,7 +535,7 @@ cursor: pointer;
 	opacity: 0px;
 	color: #ffffff;
 	background: #000;
-	
+
 }
 
 
@@ -440,7 +560,7 @@ cursor: pointer;
 
 /* fenetre modal ajout photo  */
 
-.modal-container-add-photo{
+.modal-container-add-photo {
 	display: none;
 	position: fixed;
 	top: 0;
@@ -448,12 +568,13 @@ cursor: pointer;
 	height: 100vh;
 	max-width: 1440px;
 }
-.modal-container-add-photo.active{
+
+.modal-container-add-photo.active {
 	display: block;
 }
 
 
-#close-modal-add{
+#close-modal-add {
 	position: fixed;
 	right: 40px;
 	top: 35px;
@@ -462,7 +583,7 @@ cursor: pointer;
 	padding: 6px 5.99px 5.99px 6px;
 	gap: 0px;
 	opacity: 0px;
-	font-size: 10px ;
+	font-size: 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -471,7 +592,7 @@ cursor: pointer;
 	cursor: pointer;
 }
 
-.container-add-newphoto{
+.container-add-newphoto {
 	width: 75%;
 	height: 80%;
 	display: flex;
@@ -479,12 +600,12 @@ cursor: pointer;
 	justify-content: center;
 	align-items: center;
 	border-bottom: 1px solid #B3B3B3;
-	
+
 }
 
 .container-newphoto {
 	width: 100%;
-	height: 35%;
+	height: 169px;
 	margin-top: 5px;
 	margin-bottom: 20px;
 	border-radius: 3px;
@@ -497,8 +618,7 @@ cursor: pointer;
 }
 
 .container-newphoto img {
-    max-width: 420px;
-    max-height: 175px;
+	max-height: 100%;
 
 }
 
@@ -506,7 +626,7 @@ cursor: pointer;
 	display: none;
 }
 
-.visu-photo{
+.visu-photo {
 	width: 100%;
 	height: 100%;
 	border-radius: 3px;
@@ -517,6 +637,7 @@ cursor: pointer;
 	gap: 10px;
 	background: #E8F1F6;
 }
+
 .visu-photo p {
 	font-family: 'Work Sans';
 	font-size: 10px;
@@ -524,9 +645,10 @@ cursor: pointer;
 	line-height: 11.73px;
 	text-align: center;
 	color: #444444;
-	
+
 }
-#browse-button{
+
+#browse-button {
 	width: 173px;
 	height: 36px;
 	gap: 0px;
@@ -541,7 +663,7 @@ cursor: pointer;
 	text-align: center;
 	border: 0;
 	color: #306685;
-	
+
 }
 
 .fa-image {
@@ -554,16 +676,17 @@ cursor: pointer;
 	padding: 0;
 	color: #B9C5CC;
 
-	
+
 }
 
-form{
+form {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
-#valide-photo{
+
+#valide-photo {
 	width: 237px;
 	height: 36px;
 	top: 1267px;
@@ -578,11 +701,11 @@ form{
 	font-weight: 700;
 	line-height: 16.8px;
 	text-align: center;
-	cursor: pointer;
 	background: #A7A7A7;
 	color: #ffffff;
 }
-#return-modal{
+
+#return-modal {
 	position: fixed;
 	left: 40px;
 	top: 35px;
@@ -608,10 +731,10 @@ form{
 	background: #FFFFFF;
 	color: gray;
 	box-shadow: 0px 4px 14px 0px #00000017;
-	
+
 }
 
-#title{
+#title {
 	width: 420px;
 	height: 51px;
 	top: 1011px;
@@ -623,8 +746,9 @@ form{
 	background: #FFFFFF;
 	box-shadow: 0px 4px 14px 0px #00000017;
 
-	
+
 }
+
 label[for="title"] {
 	width: 32px;
 	height: 16px;
@@ -639,8 +763,9 @@ label[for="title"] {
 	text-align: left;
 	color: #3D3D3D;
 
-		
+
 }
+
 label[for="category"] {
 	width: 65px;
 	height: 16px;
@@ -648,15 +773,16 @@ label[for="category"] {
 	margin-top: 25px;
 	gap: 0px;
 	opacity: 0px;
-	font-family:'Work Sans';
+	font-family: 'Work Sans';
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 16.42px;
 	text-align: left;
 	color: #3D3D3D;
 
-		
+
 }
+
 .container-add-newphoto h2 {
 	font-family: 'Work Sans';
 	font-size: 26px;
@@ -666,3 +792,14 @@ label[for="category"] {
 	margin-bottom: 35px;
 }
 
+/* Style du bouton désactivé (gris) */
+#valide-photo.disabled {
+	background-color: grey;
+	cursor: not-allowed;
+}
+
+/* Style du bouton activé (vert) */
+#valide-photo.enabled {
+	background-color: #1D6154;
+	cursor: pointer;
+}
