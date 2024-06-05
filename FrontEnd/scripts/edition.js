@@ -49,32 +49,35 @@ function filterImagesByCategory(category) {
 
 // fenetre modal
 
-document.addEventListener('DOMContentLoaded', function () {
-    const openModalLink = document.getElementById('open-modal');
-    const closeModalButton = document.getElementById('close-modal');
-    const modalContainer = document.querySelector('.modal-container');
+// document.addEventListener('DOMContentLoaded', function () {
+const openModalLink = document.getElementById('open-modal');
+const closeModalButton = document.getElementById('close-modal');
+const modalContainert = document.querySelector('.modal-container');
 
-    openModalLink.addEventListener('click', function (e) {
-        e.preventDefault();
+openModalLink.addEventListener('click', function (e) {
+    e.preventDefault();
 
-        // Ouvrir la fenêtre modale
-        modalContainer.classList.add('active');
-    });
-
-    closeModalButton.addEventListener('click', function () {
-        // Fermer la fenêtre modale
-        modalContainer.classList.remove('active');
-    });
+    // Ouvrir la fenêtre modale
+    modalContainert.classList.add('active');
 });
 
+closeModalButton.addEventListener('click', function () {
+    // Fermer la fenêtre modale
+    modalContainert.classList.remove('active');
+});
+// });
 
-// fonction pour charger les images dans la fenêtre modale
+
+// document.addEventListener('DOMContentLoaded', loadModalImages);
+
 function loadModalImages() {
     const gridPhoto = document.querySelector('.grid-photo');
     gridPhoto.innerHTML = ''; // Efface le contenu précédent de la fenêtre modale
 
     arrayData.forEach(project => {
         const imageContainer = document.createElement('div');
+        imageContainer.setAttribute('data-id', project.id); // Ajoute l'ID en tant qu'attribut de données
+
         const image = document.createElement('img');
         const deleteIcon = document.createElement('i');
         deleteIcon.className = 'delete-icon fa-solid fa-trash-can';
@@ -91,29 +94,34 @@ function loadModalImages() {
     });
 }
 
-// **********************************************fetch delet************************************************
-
-// Fonction pour envoyer une requête DELETE et supprimer l'image de la div
 function deleteImage(imageId, imageContainer) {
-    fetch(`http://localhost:5678/api/works${imageUrl}`, {
+    const token = localStorage.getItem("token"); // Récupère le token depuis le localStorage
+
+    fetch(`http://localhost:5678/api/works/${imageId}`, { // Utilise l'ID de l'image dans l'URL
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
         }
     })
         .then(response => {
-            if (response.ok) {
+            if (response.status == 204) {
                 // Supprime l'image de la div
                 imageContainer.remove();
+                debugger;
+                console.log('Image supprimée avec succès');
             } else {
-                console.error('Failed to delete image');
+                console.error('Échec de la suppression de l\'image');
             }
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Erreur:', error);
         });
 }
 
+// // Charge les images lorsque le DOM est prêt
+// document.addEventListener('DOMContentLoaded', loadModalImages);
+loadModalImages();
 
 const btnAddPhoto = document.getElementById('addphoto');
 
@@ -127,13 +135,13 @@ const returnModal = document.getElementById('return-modal');
 btnAddPhoto.addEventListener('click', function (e) {
     e.preventDefault();
 
-    // Ouvrir la fenêtre modale
+    // Ouvrir modale
     modalContainerAdd.classList.add('active');
     modalContainer.classList.remove('active');
 });
 
 closeModalAddButton.addEventListener('click', function () {
-    // Fermer la fenêtre modale
+    // Fermer modale
     modalContainerAdd.classList.remove('active');
     modalContainer.classList.remove('active');
 });
@@ -159,19 +167,16 @@ document.getElementById('photo-input').addEventListener('change', function () {
     if (this.files && this.files.length > 0) {
         uploadButton.classList.remove('disabled');
         uploadButton.classList.add('enabled');
-        uploadButton.disabled = false; // Le bouton devient cliquable
+        uploadButton.disabled = false;
     } else {
         uploadButton.classList.remove('enabled');
         uploadButton.classList.add('disabled');
-        uploadButton.disabled = true; // Le bouton redevient non cliquable
+        uploadButton.disabled = true;
     }
 });
 
 
-
-
-
-// *********************** fetch post new photo ; test 1
+// *********************** fetch post new photo 
 
 function AddPhoto() {
     const ajoutButton = document.getElementById('valide-photo');
@@ -183,72 +188,65 @@ function AddPhoto() {
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
-        const output = document.querySelector("#output");
-
         const fd = new FormData();
-        const token = localStorage.getItem("token")
-        console.log(token);
+        const token = localStorage.getItem("token");
 
         fd.append('title', titreNewPhoto.value);
         fd.append('category', categoryNewPhoto.value);
+
         if (photoInput.files.length > 0) {
-            fd.append('image', photoInput.files[0]);
+            const file = photoInput.files[0];
+            resizeImage(file, 367, 489, (blob) => {
+                fd.append('image', blob, file.name);
+
+                fetch("http://localhost:5678/api/works", {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: fd,
+                })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error('Error:', error));
+            });
         }
-        console.log(fd.get("category"));
-        console.log(fd.get("title"));
-        console.log(fd.get("image"));
-
-        fetch("http://localhost:5678/api/works", {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            body: fd,
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
     });
-
-
-
-    // ajoutButton.addEventListener('click', () => {
-    //     const title = titreNewPhoto.value;
-    //     const category = categoryNewPhoto.value;
-    //     const photoFile = photoInput.files[0]; // Récupère le premier fichier sélectionné
-
-
-
 
     // Ajoute un écouteur d'événements sur le changement de l'élément input de type "file"
     photoInput.addEventListener('change', (e) => {
-        console.log(e);
-        console.log("L'image a été sélectionnée avec succès !");
         visuPhoto.classList.add('active');
 
         const VisuNewImage = document.querySelector('.container-newphoto');
         const selectedImage = document.createElement('img');
         const file = photoInput.files[0];
-        console.log(file);
 
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             selectedImage.src = imageUrl;
-            console.log("L'URL de l'image est :", imageUrl);
 
+            VisuNewImage.appendChild(selectedImage);
         }
-
-        VisuNewImage.appendChild(selectedImage);
     });
 
+    // Fonction pour redimensionner l'image
+    function resizeImage(file, maxWidth, maxHeight, callback) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
 
+                canvas.width = maxWidth;
+                canvas.height = maxHeight;
+                ctx.drawImage(img, 0, 0, maxWidth, maxHeight);
 
-
+                canvas.toBlob(callback, file.type);
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
 }
-
-
-
-
-
-
 
