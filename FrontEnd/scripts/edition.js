@@ -65,10 +65,7 @@ closeModalButton.addEventListener('click', function () {
     // Fermer la fenêtre modale
     modalContainert.classList.remove('active');
 });
-// });
 
-
-// document.addEventListener('DOMContentLoaded', loadModalImages);
 
 function loadModalImages() {
     const gridPhoto = document.querySelector('.grid-photo');
@@ -108,7 +105,6 @@ function deleteImage(imageId, imageContainer) {
             if (response.status == 204) {
                 // Supprime l'image de la div
                 imageContainer.remove();
-                debugger;
                 console.log('Image supprimée avec succès');
             } else {
                 console.error('Échec de la suppression de l\'image');
@@ -117,11 +113,12 @@ function deleteImage(imageId, imageContainer) {
         .catch(error => {
             console.error('Erreur:', error);
         });
+    displayAllImages();
+    loadModalImages();
+    modalContainerAdd.classList.remove('active');
+    modalContainer.classList.remove('active');
 }
 
-// // Charge les images lorsque le DOM est prêt
-// document.addEventListener('DOMContentLoaded', loadModalImages);
-loadModalImages();
 
 const btnAddPhoto = document.getElementById('addphoto');
 
@@ -176,7 +173,7 @@ document.getElementById('photo-input').addEventListener('change', function () {
 });
 
 
-// *********************** fetch post new photo 
+// *********************** fetch post new photo *********************
 
 function AddPhoto() {
     const ajoutButton = document.getElementById('valide-photo');
@@ -210,7 +207,14 @@ function AddPhoto() {
                     .then(data => console.log(data))
                     .catch(error => console.error('Error:', error));
             });
+            displayAllImages();
+            loadModalImages();
+            modalContainerAdd.classList.remove('active');
+            modalContainer.classList.remove('active');
+            debugger;
+
         }
+
     });
 
     // Ajoute un écouteur d'événements sur le changement de l'élément input de type "file"
@@ -248,5 +252,7 @@ function AddPhoto() {
         };
         reader.readAsDataURL(file);
     }
+
+
 }
 
