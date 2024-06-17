@@ -1,17 +1,20 @@
 let arrayData = [];
-fetch("http://localhost:5678/api/works")
-    .then((res) => res.json())
-    .then((data) => {
-        arrayData = data;
-        console.log("Données récupérées :", arrayData);
 
-        // Appel de la fonction pour afficher toutes les images
-        displayAllImages();
-        loadModalImages();
-        AddPhoto();
-    })
-    .catch((err) => console.log(err));
+function fetchDisplayImages() {
+    fetch("http://localhost:5678/api/works")
+        .then((res) => res.json())
+        .then((data) => {
+            arrayData = data;
+            console.log("Données récupérées :", arrayData);
 
+            // Appel de la fonction pour afficher toutes les images
+            displayAllImages();
+            loadModalImages();
+        })
+        .catch((err) => console.log(err));
+}
+fetchDisplayImages();
+AddPhoto();
 const sectionGallery = document.querySelector(".gallery");
 const sectionButtons = document.querySelector(".filterButtons");
 
@@ -49,7 +52,6 @@ function filterImagesByCategory(category) {
 
 // fenetre modal
 
-// document.addEventListener('DOMContentLoaded', function () {
 const openModalLink = document.getElementById('open-modal');
 const closeModalButton = document.getElementById('close-modal');
 const modalContainert = document.querySelector('.modal-container');
@@ -91,9 +93,9 @@ function loadModalImages() {
     });
 }
 
-function deleteImage(imageId, imageContainer) {
+function deleteImage(imageId) {
     const token = localStorage.getItem("token"); // Récupère le token depuis le localStorage
-
+    // const imageContainer = document.createElement('div');
     fetch(`http://localhost:5678/api/works/${imageId}`, { // Utilise l'ID de l'image dans l'URL
         method: 'DELETE',
         headers: {
@@ -104,19 +106,13 @@ function deleteImage(imageId, imageContainer) {
         .then(response => {
             if (response.status == 204) {
                 // Supprime l'image de la div
-                imageContainer.remove();
+                // imageContainer.remove();
                 console.log('Image supprimée avec succès');
             } else {
                 console.error('Échec de la suppression de l\'image');
             }
         })
-        .catch(error => {
-            console.error('Erreur:', error);
-        });
-    displayAllImages();
-    loadModalImages();
-    modalContainerAdd.classList.remove('active');
-    modalContainer.classList.remove('active');
+    fetchDisplayImages();
 }
 
 
@@ -182,6 +178,7 @@ function AddPhoto() {
     const visuPhoto = document.querySelector('.visu-photo');
     const photoInput = document.getElementById('photo-input');
     const form = document.forms.namedItem("fileinfo");
+    const VisuNewImage = document.querySelector('.container-newphoto');
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -204,18 +201,33 @@ function AddPhoto() {
                     body: fd,
                 })
                     .then(response => response.json())
-                    .then(data => console.log(data))
+                    .then(data => {
+                        console.log(data);
+                        // Réinitialiser le formulaire après envoi
+                        form.reset();
+                        photoInput.value = '';
+                        // Supprimer l'aperçu de l'image
+                        visuPhoto.classList.remove('active');
+                        const existingImage = VisuNewImage.querySelector('img');
+                        if (existingImage) {
+                            VisuNewImage.removeChild(existingImage);
+                        }
+                        // Mettre à jour l'affichage des images
+                        fetchDisplayImages();
+                    })
                     .catch(error => console.error('Error:', error));
-            });
-            displayAllImages();
-            loadModalImages();
+
+            })
+
             modalContainerAdd.classList.remove('active');
             modalContainer.classList.remove('active');
-            debugger;
+
 
         }
 
     });
+
+
 
     // Ajoute un écouteur d'événements sur le changement de l'élément input de type "file"
     photoInput.addEventListener('change', (e) => {
@@ -252,7 +264,6 @@ function AddPhoto() {
         };
         reader.readAsDataURL(file);
     }
-
 
 }
 
