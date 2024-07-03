@@ -136,7 +136,6 @@ table {
 
 /** end reset css**/
 body {
-	max-width: 1440px;
 	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
@@ -244,6 +243,7 @@ nav li img {
 
 main {
 	padding: 0px 150px 0px 150px;
+	margin-top: 100px;
 }
 
 #introduction {
