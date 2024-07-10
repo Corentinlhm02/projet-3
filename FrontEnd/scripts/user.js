@@ -3,7 +3,7 @@ function login(){
 
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const loginCreds = JSON.stringify({
+        const loginCreds = JSON.stringify({ //convertion de l'objet en JSON
             email:e.target.querySelector('[name=email]').value,
             password:e.target.querySelector('[name=password]').value
         });

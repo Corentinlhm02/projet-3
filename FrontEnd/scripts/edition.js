@@ -20,7 +20,7 @@ const sectionButtons = document.querySelector(".filterButtons");
 
 // fonction pour afficher toutes les images
 function displayAllImages() {
-    sectionGallery.innerHTML = '';
+    sectionGallery.innerHTML = ''; 
     arrayData.forEach(project => {
         const projectContainer = document.createElement('div');
         const projectImage = document.createElement('img');
@@ -68,14 +68,14 @@ closeModalButton.addEventListener('click', function () {
     modalContainert.classList.remove('active');
 });
 
-
+// affiche les images dans la fenetre modale
 function loadModalImages() {
     const gridPhoto = document.querySelector('.grid-photo');
     gridPhoto.innerHTML = ''; // Efface le contenu précédent de la fenêtre modale
 
     arrayData.forEach(project => {
         const imageContainer = document.createElement('div');
-        imageContainer.setAttribute('data-id', project.id); // Ajoute l'ID en tant qu'attribut de données
+        imageContainer.setAttribute('data-id', project.id);
 
         const image = document.createElement('img');
         const deleteIcon = document.createElement('i');
@@ -86,7 +86,7 @@ function loadModalImages() {
         imageContainer.appendChild(deleteIcon);
         gridPhoto.appendChild(imageContainer);
 
-        // Ajoute un gestionnaire d'événements pour l'icône de suppression
+        // Ajoute un événements pour l'icône de suppression
         deleteIcon.addEventListener('click', () => {
             deleteImage(project.id, imageContainer);
         });
@@ -95,7 +95,7 @@ function loadModalImages() {
 
 function deleteImage(imageId) {
     const token = localStorage.getItem("token"); // Récupère le token depuis le localStorage
-    // const imageContainer = document.createElement('div');
+
     fetch(`http://localhost:5678/api/works/${imageId}`, { // Utilise l'ID de l'image dans l'URL
         method: 'DELETE',
         headers: {
@@ -228,7 +228,6 @@ function AddPhoto() {
     });
 
 
-
     // Ajoute un écouteur d'événements sur le changement de l'élément input de type "file"
     photoInput.addEventListener('change', (e) => {
         visuPhoto.classList.add('active');
@@ -251,6 +250,7 @@ function AddPhoto() {
         reader.onload = function (event) {
             const img = new Image();
             img.onload = function () {
+                // Création d'un canvas pour dessiner l'image redimensionnée
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
 
@@ -258,7 +258,9 @@ function AddPhoto() {
                 canvas.height = maxHeight;
                 ctx.drawImage(img, 0, 0, maxWidth, maxHeight);
 
-                canvas.toBlob(callback, file.type);
+                //prend l'image dans le canvas et le transforme en fichier blob, pour etre manipulé
+                canvas.toBlob(callback, file.type); 
+
             };
             img.src = event.target.result;
         };
