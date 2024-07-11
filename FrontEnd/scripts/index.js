@@ -14,22 +14,22 @@ const sectionGallery = document.querySelector(".gallery");
 const sectionButtons = document.querySelector(".filterButtons");
 
 function createButtons(categories) {
-    // Ajout du bouton "Tous"
+    // Bouton "Tous"
     const allButton = document.createElement('button');
     allButton.innerText = 'Tous';
     allButton.classList.add('btn-tous', 'btnFilter');
     allButton.id = 'btnFilter-0';
-    allButton.addEventListener('click', handleButtonClick); // Ajouter le gestionnaire d'événements
+    allButton.addEventListener('click', handleButtonClick);
     
     sectionButtons.appendChild(allButton);
 
-    // Création des autres boutons à partir des catégories
+    // Autres boutons
     categories.forEach((category, index) => {
         const button = document.createElement('button');
         button.innerText = category.name;
         button.classList.add('btnFilter');
         button.id = `btnFilter-${index + 1}`;
-        button.addEventListener('click', handleButtonClick); // Ajouter le gestionnaire d'événements
+        button.addEventListener('click', handleButtonClick);
         sectionButtons.appendChild(button);
     });
 }
@@ -52,7 +52,6 @@ function filterImagesByCategory(category) {
     });
 }
 
-// Requête à l'API pour obtenir les catégories
 fetch('http://localhost:5678/api/categories')
     .then(response => response.json())
     .then(data => {
@@ -65,15 +64,10 @@ fetch('http://localhost:5678/api/categories')
 
 // Fonction pour gérer la sélection des boutons
 function handleButtonClick(event) {
-    // Supprime la classe "button-selected" de tous les boutons
     document.querySelectorAll('button').forEach(button => {
         button.classList.remove('button-selected');
     });
-
-    // Ajoute la classe "button-selected" au bouton cliqué
     event.target.classList.add('button-selected');
-
-    // Affiche les images selon le bouton cliqué
     const category = event.target.innerText;
     filterImagesByCategory(category);
 }
