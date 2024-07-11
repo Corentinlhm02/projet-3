@@ -33,25 +33,7 @@ function displayAllImages() {
     });
 }
 
-// fonction pour filtrer les images par catégorie
-function filterImagesByCategory(category) {
-    sectionGallery.innerHTML = '';
-    arrayData.forEach(project => {
-        if (project.category.name === category) {
-            const projectContainer = document.createElement('div');
-            const projectImage = document.createElement('img');
-            projectImage.src = project.imageUrl;
-            const projectName = document.createElement('h3');
-            projectName.innerText = project.title;
-            projectContainer.appendChild(projectImage);
-            projectContainer.appendChild(projectName);
-            sectionGallery.appendChild(projectContainer);
-        }
-    });
-}
-
 // fenetre modal
-
 const openModalLink = document.getElementById('open-modal');
 const closeModalButton = document.getElementById('close-modal');
 const modalContainert = document.querySelector('.modal-container');
